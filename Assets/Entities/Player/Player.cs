@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : Ship {
+public class Player: Ship
+{
 
-	private bool _rightKey;
-	private bool _leftKey;
+      private bool _rightKey;
+      private bool _leftKey;
+      private bool _shootKey;
+      //private int _bulletCount;
+
+      public GameObject Bullet;
+      public float FireRate = 0.2f;
 
 
-	// Use this for initialization
-	public override void Start () 
-	{
+
+      // Use this for initialization
+      public override void Start()
+      {
             ShipSpeed = 10.0f;
-        
+
             //Call upon the start function from the base class
-		base.Start();
+            base.Start();
 
             //Save the X ranges of the view port
             XMinRange = AllTheWayLeft.x + Padding;
@@ -22,41 +29,74 @@ public class Player : Ship {
 
 
 
-	// Update is called once per frame
-	public override void Update () 
-	{
-		ShipMovement();
-	}
+      // Update is called once per frame
+      public override void Update()
+      {
+            ShipMovement();
+      }
 
 
 
-	//Get the player input
-	void PlayerInput()
-	{
-		_rightKey = Input.GetKey(KeyCode.RightArrow);
-		_leftKey = Input.GetKey(KeyCode.LeftArrow);
-	}
+      //Get the player input
+      private void PlayerInput()
+      {
+            _rightKey = Input.GetKey( KeyCode.RightArrow );
+            _leftKey = Input.GetKey( KeyCode.LeftArrow );
+            _shootKey = Input.GetKeyDown( KeyCode.Space );
+      }
 
 
 
-	//Move the ship
-	public override void ShipMovement()
-	{
-		PlayerInput();
+      //Move the ship
+      public override void ShipMovement()
+      {
+            PlayerInput();
 
-		//Move right 
-		if (_rightKey)
-		{
-			ShipTransform.position += Vector3.right * (ShipSpeed * Time.deltaTime);
-		}
+            //Check if the press key
+            if ( _shootKey )
+            {
+                  //Repeat call the method passed as an argument
+                  //InvokeRepeating( "ShootBullet", 0.000001f, FireRate );
 
-		//Move left 
-		else if (_leftKey)
-		{
-			ShipTransform.position += Vector3.left * (ShipSpeed * Time.deltaTime);
-		}
+                  //Shoot Bullet
+                  ShootBullet();
+            } 
+
+            //Move right 
+            if ( _rightKey )
+            {
+                  ShipTransform.position += Vector3.right * ( ShipSpeed * Time.deltaTime );
+            }
+
+            //Move left 
+            else if ( _leftKey )
+            {
+                  ShipTransform.position += Vector3.left * ( ShipSpeed * Time.deltaTime );
+            }
 
             //Base Class Ship Movement method
             base.ShipMovement();
-	}
+      }
+
+
+
+      //Shoot the bullet.
+      private void ShootBullet()
+      {
+            GameObject bulletClone = Instantiate( Bullet, transform.position, Quaternion.identity ) as GameObject;
+      }
+
+
+
+      //Keep track of the bullet count and destroy oldest one
+      //private void DestroyBullet(GameObject bullet)
+      //{
+      //      const int bulletLimit = 0;
+
+      //      _bulletCount++;
+      //      if ( _bulletCount > bulletLimit )
+      //      {
+      //            Destroy( bullet, 2f );
+      //      }
+      //}
 }

@@ -9,6 +9,7 @@ public class Ship: MonoBehaviour
       public Transform ShipTransform;
 
       //Player and scene information and padding
+      protected int MyHealth = 3;
       protected float ShipSpeed = 1f;
       protected float Padding = 0.5f;
       protected float XMinRange = -5f;

@@ -9,8 +9,9 @@ public class SpawnEnemyFormation: Ship
 
       public float _spaceWidth = 10f;
       private float _spaceHeight = 10f;
-      private float _formationSPeed = 5f;
       private bool _movingRight;
+
+      public float _formationSPeed = 5f;
 
 
       // Use this for initialization
@@ -20,7 +21,7 @@ public class SpawnEnemyFormation: Ship
             _movingRight = true;
 
             //Spawn an enemy ship on all the position's transform 
-            foreach ( Transform positionChild in transform )
+            foreach ( Transform positionChild in this.transform )
             {
                   GameObject enemyCopy = Instantiate( EnemyPrefab, positionChild.transform.position,
                         Quaternion.identity ) as GameObject;
@@ -32,8 +33,12 @@ public class SpawnEnemyFormation: Ship
 
             //Limit the play space movement
             Padding = 10f;
+
+            //Left wall
             XMinRange = AllTheWayLeft.x;
-            XMaxRange = AllTheWayRight.x; 
+
+            //Right wall
+            XMaxRange = AllTheWayRight.x;
       }
 
 
@@ -41,13 +46,14 @@ public class SpawnEnemyFormation: Ship
       public void OnDrawGizmos()
       {
             //Create a Gizmo cube around the spawn object 
-            Gizmos.DrawWireCube(transform.position, new Vector3(_spaceWidth, _spaceHeight));     
+            Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
       }
 
 
       // Update is called once per frame
       public override void Update()
       {
+            //Player movement
             if ( _movingRight )
             {
                   transform.position += Vector3.right * ( _formationSPeed * Time.deltaTime );
@@ -56,16 +62,18 @@ public class SpawnEnemyFormation: Ship
             } else
             {
                   transform.position += Vector3.left * ( _formationSPeed * Time.deltaTime );
-            }   
+            }
 
-            //Ship Movement
-            float rightEdgeOfFormation = ( transform.position.x + ( _spaceWidth * 0.5f ) );
-            float leftEdgeOfFormation = ( transform.position.x - ( _spaceWidth * 0.5f ) );
+            //Check if the formation is touching either side of the playspace
+            float rightEdgeOfFormation = ( this.transform.position.x + ( _spaceWidth * 0.5f ) );
+            float leftEdgeOfFormation = ( this.transform.position.x - ( _spaceWidth * 0.5f ) );
 
-            if ( (leftEdgeOfFormation < XMinRange) || (rightEdgeOfFormation > XMaxRange) )
+            if ( leftEdgeOfFormation <= XMinRange )
             {
-                  _movingRight = !_movingRight;
-                       
+                  _movingRight = true;
+            } else if ( rightEdgeOfFormation >= XMaxRange )
+            {
+                  _movingRight = false;
             }
       }
 }

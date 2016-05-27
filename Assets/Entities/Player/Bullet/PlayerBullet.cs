@@ -27,19 +27,4 @@ public class PlayerBullet : Bullet {
       {
             MyRigidbody.velocity = new Vector2(0, MySpeed);      
       }
-
-
-      //Inflict Damage to the collider object
-      public int Damage()
-      {
-            //When this function is called, the Damage value will be return where it been called.
-            return MyDamage;
-      }
-
-
-      //Hit function
-      public void Hit()
-      {
-            Destroy(gameObject);      
-      }
 }

@@ -5,7 +5,7 @@ public class Enemy: Ship
 {
       public GameObject Bullet;
 
-
+      public float ShotPerSeconds = 0.5f;
       // Use this for initialization
       public override void Start()
       {
@@ -17,10 +17,12 @@ public class Enemy: Ship
       // Update is called once per frame
       public override void Update()
       {
-            float fireRate = Random.value * Time.deltaTime;
+            float shootProbability = Time.deltaTime * ShotPerSeconds;
 
-            //Invoke the bullet
-            InvokeRepeating( "Shoot", 0.00001f, fireRate );
+            if(Random.value < shootProbability)
+            {
+                  Shoot();
+            }
       }
 
 
@@ -28,10 +30,6 @@ public class Enemy: Ship
       private void Shoot()
       {
             Vector3 startPosition = transform.position + new Vector3( 0, -1f, 0 );
-            Instantiate( Bullet, startPosition, Quaternion.identity );
-
-            //Keep track of the bullets
-            EnemyBullet myBullet = new EnemyBullet();
-            myBullet.TakeBulletCount();
+            GameObject bulletClone = Instantiate( Bullet, startPosition, Quaternion.identity ) as GameObject;
       }
 }

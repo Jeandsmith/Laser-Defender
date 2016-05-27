@@ -21,4 +21,18 @@ public class Bullet: MonoBehaviour
       {
 
       }
+
+
+      //Create Damage
+      public virtual int Damage()
+      {
+            return MyDamage;
+      }
+
+
+      //Hit function
+      public virtual void Hit()
+      {
+            Destroy(gameObject);           
+      }
 }

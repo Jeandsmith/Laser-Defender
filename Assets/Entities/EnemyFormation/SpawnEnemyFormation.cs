@@ -7,11 +7,11 @@ public class SpawnEnemyFormation: Ship
       public GameObject EnemyPrefab;
 
 
-      private float _spaceWidth = 10f;
+      private float _spaceWidth = 21.5f;
       private float _spaceHeight = 10f;
       private bool _movingRight;
 
-      public float _formationSPeed = 5f;
+      public float FormationSpeed = 5f;
 
 
       // Use this for initialization
@@ -43,11 +43,11 @@ public class SpawnEnemyFormation: Ship
 
 
       //Play Space Gizmo's
-      //public void OnDrawGizmos()
-      //{
-      //      //Create a Gizmo cube around the spawn object 
-      //      Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
-      //}
+      public void OnDrawGizmos()
+      {
+            //Create a Gizmo cube around the spawn object 
+            Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
+      }
 
 
       // Update is called once per frame
@@ -56,17 +56,15 @@ public class SpawnEnemyFormation: Ship
             //Player movement
             if ( _movingRight )
             {
-                  transform.position += Vector3.right * ( _formationSPeed * Time.deltaTime );
-
-
+                  transform.position += Vector3.right * ( FormationSpeed * Time.deltaTime );
             } else
             {
-                  transform.position += Vector3.left * ( _formationSPeed * Time.deltaTime );
+                  transform.position += Vector3.left * ( FormationSpeed * Time.deltaTime );
             }
 
-            //Check if the formation is touching either side of the playspace
-            float rightEdgeOfFormation = ( this.transform.position.x + ( _spaceWidth * 0.5f ) );
-            float leftEdgeOfFormation = ( this.transform.position.x - ( _spaceWidth * 0.5f ) );
+            //Check if the formation is touching either side of the play space
+            float rightEdgeOfFormation = ( transform.position.x + ( _spaceWidth * 0.5f ) );
+            float leftEdgeOfFormation = ( transform.position.x - ( _spaceWidth * 0.5f ) );
 
             if ( leftEdgeOfFormation <= XMinRange )
             {

@@ -18,6 +18,7 @@ public class Player: Ship
       public override void Start()
       {
             ShipSpeed = 10.0f;
+            MyHealth = 4;
 
             //Call upon the start function from the base class
             base.Start();
@@ -48,7 +49,7 @@ public class Player: Ship
 
 
       //Move the ship
-      public override void ShipMovement()
+      protected override void ShipMovement()
       {
             PlayerInput();
 
@@ -83,7 +84,8 @@ public class Player: Ship
       //Shoot the bullet.
       private void ShootBullet()
       {
-            GameObject bulletClone = Instantiate( Bullet, transform.position, Quaternion.identity ) as GameObject;
+            Vector3 startPosition = transform.position + new Vector3( 0, 0.7f, 0 );
+            Instantiate( Bullet, startPosition, Quaternion.identity );
       }
 
 

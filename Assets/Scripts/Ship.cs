@@ -37,17 +37,41 @@ public class Ship: MonoBehaviour
       // Update is called once per frame
       public virtual void Update()
       {
-    
+
       }
 
 
       //Ship Movement
-      public virtual void ShipMovement()
+      protected virtual void ShipMovement()
       {
             //Restrict the boundaries of the player's movement to the width of the screen
             float newX = Mathf.Clamp( ShipTransform.position.x, XMinRange, XMaxRange );
 
             //reset the position of the ship to the game space
             ShipTransform.position = new Vector3( newX, ShipTransform.position.y, ShipTransform.position.z );
+      }
+
+
+      //Check Collision
+      protected void RunCollision(Collider2D other)
+      {
+            //Get the bullet component 
+            PlayerBullet bullet = other.gameObject.GetComponent<PlayerBullet>();
+
+            //Check that the player bullet is not null
+            if ( bullet != null )
+            {
+                  print( "I see a missile running" );
+                  MyHealth -= bullet.Damage();
+                  print( "Health: " + MyHealth );
+
+                  //Check if the player's health is at 0
+                  if ( MyHealth <= 0 )
+                  {
+                        Destroy( gameObject );
+                        MyHealth = 0;
+                  }
+                  bullet.Hit();
+            }
       }
 }

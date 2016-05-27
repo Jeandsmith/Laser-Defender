@@ -7,7 +7,7 @@ public class SpawnEnemyFormation: Ship
       public GameObject EnemyPrefab;
 
 
-      public float _spaceWidth = 10f;
+      private float _spaceWidth = 10f;
       private float _spaceHeight = 10f;
       private bool _movingRight;
 
@@ -43,11 +43,11 @@ public class SpawnEnemyFormation: Ship
 
 
       //Play Space Gizmo's
-      public void OnDrawGizmos()
-      {
-            //Create a Gizmo cube around the spawn object 
-            Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
-      }
+      //public void OnDrawGizmos()
+      //{
+      //      //Create a Gizmo cube around the spawn object 
+      //      Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
+      //}
 
 
       // Update is called once per frame

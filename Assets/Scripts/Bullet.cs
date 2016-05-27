@@ -8,11 +8,13 @@ public class Bullet: MonoBehaviour
 
       protected Rigidbody2D MyRigidbody;
 
+
       // Use this for initialization
       public virtual void Start()
       {
             MyRigidbody = GetComponent<Rigidbody2D>();     
       }
+
 
       // Update is called once per frame
       private void Update()

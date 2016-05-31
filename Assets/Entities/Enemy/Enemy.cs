@@ -4,12 +4,14 @@ using System.Collections;
 public class Enemy: Ship
 {
       public GameObject Bullet;
-
+     
       public float ShotPerSeconds = 0.5f;
+
+
       // Use this for initialization
       public override void Start()
       {
-
+            
       }
 
 
@@ -19,7 +21,7 @@ public class Enemy: Ship
       {
             float shootProbability = Time.deltaTime * ShotPerSeconds;
 
-            if(Random.value < shootProbability)
+            if ( Random.value < shootProbability )
             {
                   Shoot();
             }

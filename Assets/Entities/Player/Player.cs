@@ -11,6 +11,7 @@ public class Player: Ship
 
       public GameObject Bullet;
       public float FireRate = 0.2f;
+     
 
 
 

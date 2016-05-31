@@ -61,7 +61,6 @@ public class Ship: MonoBehaviour
             //Check that the player bullet is not null
             if ( bullet != null )
             {
-                  print( "I see a missile running" );
                   MyHealth -= bullet.Damage();
                   print( "Health: " + MyHealth );
 

@@ -8,10 +8,10 @@ public class SpawnEnemyFormation: Ship
 
 
       private float _spaceWidth = 21.5f;
-      private float _spaceHeight = 10f;
       private bool _movingRight;
 
       public float FormationSpeed = 5f;
+      public float SpawnDelay = 1f;
 
 
       // Use this for initialization
@@ -20,16 +20,8 @@ public class SpawnEnemyFormation: Ship
             base.Start();
             _movingRight = true;
 
-            //Spawn an enemy ship on all the position's transform 
-            foreach ( Transform positionChild in this.transform )
-            {
-                  GameObject enemyCopy = Instantiate( EnemyPrefab, positionChild.transform.position,
-                        Quaternion.identity ) as GameObject;
-
-                  //Set the enemy object to be spawn as a child of the position object
-                  enemyCopy.transform.parent = positionChild;
-
-            }
+            //Spawn Enemies 
+            SpawnUntilFull();
 
             //Limit the play space movement
             Padding = 10f;
@@ -39,14 +31,6 @@ public class SpawnEnemyFormation: Ship
 
             //Right wall
             XMaxRange = AllTheWayRight.x;
-      }
-
-
-      //Play Space Gizmo's
-      public void OnDrawGizmos()
-      {
-            //Create a Gizmo cube around the spawn object 
-            Gizmos.DrawWireCube( this.transform.position, new Vector3( _spaceWidth, _spaceHeight ) );
       }
 
 
@@ -73,5 +57,86 @@ public class SpawnEnemyFormation: Ship
             {
                   _movingRight = false;
             }
+
+            //Check if the formation is dead
+            if ( AllEnemiesDead() )
+            {
+                  SpawnUntilFull();
+            }
+      }
+
+
+      //	Check if all enemies are dead
+      private bool AllEnemiesDead()
+      {
+            int enemyCount;
+            //Go throught all child position object within this object
+            foreach ( Transform childObject in this.transform )
+            {
+                  //check if the child count is greater than 0;
+                  enemyCount = childObject.childCount;
+                  if ( enemyCount > 0 )
+                  {
+                        //Return not all enemies are dead.
+                        return false;
+                  }
+            }
+
+            //All enemies are dead.
+            return true;
+      }
+
+
+      //Spawn until full 
+      private void SpawnUntilFull()
+      {
+            Transform freePosition = FindNextFreePosition();
+
+            if ( freePosition != null )
+            {
+                  GameObject enemyCopy = Instantiate( EnemyPrefab, freePosition.transform.position,
+                        Quaternion.identity ) as GameObject;
+
+                  //Set the enemy object to be spawn as a child of the position object
+                  enemyCopy.transform.parent = freePosition;
+            }
+
+            //Invoke this function with a time delay
+            if ( FindNextFreePosition() )
+            { Invoke( "SpawnUntilFull", SpawnDelay ); }
+      }
+
+
+      //Spawn an enemy one by one.
+      private Transform FindNextFreePosition()
+      {
+            foreach ( Transform freePosition in transform )
+            {
+                  int childTransform = freePosition.childCount;
+                  if ( childTransform == 0 )
+                  {
+                        return freePosition.transform;
+                  }
+            }
+
+            //return null if the transform of this object is not empty.
+            return null;
+      }
+
+
+      //Spawn Enemy Group
+      private void SpawnFormation()
+      {
+            //Spawn an enemy ship on all the position's transform 
+            foreach ( Transform positionChild in this.transform )
+            {
+                  GameObject enemyCopy = Instantiate( EnemyPrefab, positionChild.transform.position,
+                        Quaternion.identity ) as GameObject;
+
+                  //Set the enemy object to be spawn as a child of the position object
+                  enemyCopy.transform.parent = positionChild;
+
+            }
+
       }
 }

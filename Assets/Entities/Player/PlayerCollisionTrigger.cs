@@ -12,7 +12,7 @@ public class PlayerCollisionTrigger: Ship
             //Check that the player bullet is not null
             if ( eBullet != null )
             {
-                  print( "I see a missile running" );
+//                  print( "I see a missile running" );
                   MyHealth -= eBullet.Damage();
                   print( "Health: " + MyHealth );
 

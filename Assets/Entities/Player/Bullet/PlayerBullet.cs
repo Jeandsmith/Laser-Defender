@@ -10,7 +10,7 @@ public class PlayerBullet : Bullet {
       { 
             //Have use of the base class functions
             base.Start();
-            MySpeed = 6f;
+            MySpeed = 10f;
       }
 	
 

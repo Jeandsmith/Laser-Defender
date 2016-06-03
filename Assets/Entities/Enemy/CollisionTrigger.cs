@@ -3,14 +3,15 @@ using System.Collections;
 
 public class CollisionTrigger: Ship
 {
-      private ScoreKeeper ScoreTracker;
+      private ScoreKeeper _scoreTracker;
       public int MyValue = 154;
 
 
 
       public override void Start()
       {
-            ScoreTracker = GetComponent<ScoreKeeper>();
+            //Get the game object and it's component.
+            _scoreTracker = FindObjectOfType<ScoreKeeper>().GetComponent<ScoreKeeper>();
       }
 
 
@@ -24,13 +25,13 @@ public class CollisionTrigger: Ship
             if ( bullet != null )
             {
                   MyHealth -= bullet.Damage();
-                  print( "Health: " + MyHealth );
 
                   //Check if the player's health is at 0
                   if ( MyHealth <= 0 )
                   {
-                        ScoreTracker.MaintainScore(MyValue);
+                        _scoreTracker.MaintainScore( MyValue );
                         Destroy( gameObject );
+                        AudioSource.PlayClipAtPoint(DeadClip, transform.position);
                         MyHealth = 0;
                   }
                   bullet.Hit();

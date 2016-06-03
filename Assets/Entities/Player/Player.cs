@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Player: Ship
 {
-
       private bool _rightKey;
       private bool _leftKey;
       private bool _shootKey;
@@ -32,7 +31,7 @@ public class Player: Ship
 
 
       // Update is called once per frame
-      public override void Update()
+      public void Update()
       {
             ShipMovement();
       }
@@ -57,9 +56,6 @@ public class Player: Ship
             //Check if the press key
             if ( _shootKey )
             {
-                  //Repeat call the method passed as an argument
-                  //InvokeRepeating( "ShootBullet", 0.000001f, FireRate );
-
                   //Shoot Bullet
                   ShootBullet();
             } 
@@ -85,21 +81,7 @@ public class Player: Ship
       //Shoot the bullet.
       private void ShootBullet()
       {
-            Vector3 startPosition = transform.position + new Vector3( 0, 0.7f, 0 );
-            Instantiate( Bullet, startPosition, Quaternion.identity );
+            Audio.Play();
+            Instantiate( Bullet, transform.position, Quaternion.identity );
       }
-
-
-
-      //Keep track of the bullet count and destroy oldest one
-      //private void DestroyBullet(GameObject bullet)
-      //{
-      //      const int bulletLimit = 0;
-
-      //      _bulletCount++;
-      //      if ( _bulletCount > bulletLimit )
-      //      {
-      //            Destroy( bullet, 2f );
-      //      }
-      //}
 }

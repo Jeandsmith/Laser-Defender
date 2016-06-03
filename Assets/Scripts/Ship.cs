@@ -1,5 +1,6 @@
-﻿using UnityEditor;
+﻿
 using UnityEngine;
+using System.Collections;
 
 
 //Ship base class
@@ -7,6 +8,8 @@ public class Ship: MonoBehaviour
 {
       //Get hold off the game object's transform.
       public Transform ShipTransform;
+      public AudioClip DeadClip;
+      protected AudioSource Audio;
 
       //Player and scene information and padding
       protected int MyHealth = 3;
@@ -27,17 +30,13 @@ public class Ship: MonoBehaviour
             //Get the transform of this object
             ShipTransform = GetComponent<Transform>();
 
+            //Get the audio source
+            Audio = GetComponent<AudioSource>();
+
             //Get a hold of the camera
             Distance = ShipTransform.position.z - Camera.main.transform.position.z;
             AllTheWayLeft = Camera.main.ViewportToWorldPoint( new Vector3( 0, 0, Distance ) );
             AllTheWayRight = Camera.main.ViewportToWorldPoint( new Vector3( 1f, 0, Distance ) );
-      }
-
-
-      // Update is called once per frame
-      public virtual void Update()
-      {
-
       }
 
 

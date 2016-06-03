@@ -11,7 +11,7 @@ public class SpawnEnemyFormation: Ship
       private bool _movingRight;
 
       public float FormationSpeed = 5f;
-      public float SpawnDelay = 1f;
+      public float SpawnDelay = 0.5f;
 
 
       // Use this for initialization
@@ -35,7 +35,7 @@ public class SpawnEnemyFormation: Ship
 
 
       // Update is called once per frame
-      public override void Update()
+      public void Update()
       {
             //Player movement
             if ( _movingRight )
@@ -70,7 +70,7 @@ public class SpawnEnemyFormation: Ship
       private bool AllEnemiesDead()
       {
             int enemyCount;
-            //Go throught all child position object within this object
+            //Go through all child position object within this object
             foreach ( Transform childObject in this.transform )
             {
                   //check if the child count is greater than 0;

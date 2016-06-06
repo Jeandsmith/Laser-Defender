@@ -14,7 +14,6 @@ public class CollisionTrigger: Ship
 	}
 
 
-
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		//Get the bullet component 
@@ -28,6 +27,7 @@ public class CollisionTrigger: Ship
 			//Check if the player's health is at 0
 			if ( MyHealth <= 0 )
 			{
+                SpawnExplosion(1.2f);
 				_scoreTracker.MaintainScore( MyValue );
 				Destroy( gameObject );
 				AudioSource.PlayClipAtPoint( DeadClip, transform.position );

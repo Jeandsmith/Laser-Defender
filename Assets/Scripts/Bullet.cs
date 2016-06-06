@@ -5,7 +5,6 @@ public class Bullet: MonoBehaviour
 {
       protected float MySpeed;
       protected int MyDamage = 1;
-
       protected Rigidbody2D MyRigidbody;
 
 

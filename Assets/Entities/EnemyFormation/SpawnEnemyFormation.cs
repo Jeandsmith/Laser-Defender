@@ -71,7 +71,7 @@ public class SpawnEnemyFormation: Ship
       {
             int enemyCount;
             //Go through all child position object within this object
-            foreach ( Transform childObject in this.transform )
+            foreach ( Transform childObject in transform )
             {
                   //check if the child count is greater than 0;
                   enemyCount = childObject.childCount;

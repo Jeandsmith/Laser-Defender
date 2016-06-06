@@ -6,10 +6,9 @@ public class Player: Ship
 	private bool _rightKey;
 	private bool _leftKey;
 	private bool _shootKey;
-	//private int _bulletCount;
 
 	public GameObject Bullet;
-	public float FireRate = 0.2f;
+	private float FireRate = 0.2f;
 
 
 
@@ -82,8 +81,9 @@ public class Player: Ship
 	private void ShootBullet()
 	{
 		Audio.Play();
-		Animator shipBarrel = GameObject.Find( "ShipGunBarrel" ).GetComponent<Animator>();
-		shipBarrel.SetTrigger( "Shoot" );
-		Instantiate( Bullet, transform.position, Quaternion.identity );
+		Vector3 newPosition = new Vector3( transform.position.x, transform.position.y + 0.75f, 0 );
+		SpawnFlare( newPosition );
+		Vector3 bulletNewPosition = new Vector3(transform.position.x, transform.position.y + 0.75f, 0 );
+		Instantiate( Bullet, bulletNewPosition, Quaternion.identity );
 	}
 }

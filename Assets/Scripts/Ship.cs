@@ -9,6 +9,7 @@ public class Ship: MonoBehaviour
 	//Get hold off the game object's transform.
 	public Transform ShipTransform;
 	public AudioClip DeadClip;
+	public GameObject Flare;
 	protected AudioSource Audio;
 
 	//Player and scene information and padding
@@ -48,5 +49,19 @@ public class Ship: MonoBehaviour
 
 		//reset the position of the ship to the game space
 		ShipTransform.position = new Vector3( newX, ShipTransform.position.y, ShipTransform.position.z );
+	}
+
+	//Call upon the ship flare.
+	protected void SpawnFlare(Vector3 position)
+	{
+		GameObject flareCopy = Instantiate( Flare, position, Quaternion.identity ) as GameObject;
+		if ( flareCopy != null )
+		{
+			//Set the parent of this object.
+			flareCopy.transform.parent = transform;
+			Animator shipBarrel = flareCopy.GetComponent<Animator>();
+			shipBarrel.SetTrigger( "Shoot" );
+			Destroy( flareCopy, 0.25f );
+		}
 	}
 }

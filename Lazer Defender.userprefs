@@ -1,8 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ship.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets\Scripts\Ship.cs" Line="44" Column="2" />
+      <File FileName="Assets\Scripts\Ship.cs" Line="1" Column="1" />
       <File FileName="Assets\Entities\EnemyFormation\SpawnEnemyFormation.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

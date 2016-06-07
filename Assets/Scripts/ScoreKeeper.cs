@@ -5,28 +5,28 @@ using UnityEngine.UI;
 public class ScoreKeeper: MonoBehaviour
 {
 
-      public static int Score;
+	public static int Score;
 
-      private Text _myText;
+	private Text _myText;
 
-
-      public void Start()
-      {
-            _myText = GetComponent<Text>();
-      }
-
-
-      //Keep Track of the score
-      public void MaintainScore(int points)
-      {
-            Score += points;
-            _myText.text = Score.ToString();
-      }
+	//Run only once
+	public void Start()
+	{
+		_myText = GetComponent<Text>();
+	}
 
 
-      //Reset
-      public static void ResetScore()
-      {
-            Score = 0;
-      }
+	//Keep Track of the score
+	public void MaintainScore(int points)
+	{
+		Score += points;
+		_myText.text = Score.ToString();
+	}
+
+
+	//Reset
+	public static void ResetScore()
+	{
+		Score = 0;
+	}
 }

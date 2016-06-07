@@ -3,30 +3,33 @@ using System.Collections;
 using System.Threading;
 
 public class EnemyBullet: Bullet
-{
+{ 
+	// Use this for initialization
+	public override void Start()
+	{
+		MyDamage = 1;
+		MySpeed = 6f;
+
+		base.Start();
+	}
 
 
-
-      // Use this for initialization
-      public override void Start()
-      {
-            MyDamage = 1;
-            MySpeed = 6f;
-
-            base.Start();
-      }
+	// Update is called once per frame
+	private void Update()
+	{
+		Move();
+	}
 
 
-      // Update is called once per frame
-      private void Update()
-      {
-            Move();
-      }
+	//Move Bullet.
+	private void Move()
+	{
+		MyRigidbody.velocity = new Vector2( 0.0f, -MySpeed );
+	}
 
-
-      //Move Bullet.
-      private void Move()
-      {
-            MyRigidbody.velocity = new Vector2( 0.0f, -MySpeed );
-      }
+	//Check collision with the player
+	private void OnTriggerEnter2D(Collider2D other)
+	{  
+		SpawnExplosion( transform.position );
+	}
 }

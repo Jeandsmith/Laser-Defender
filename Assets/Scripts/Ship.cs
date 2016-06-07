@@ -14,7 +14,7 @@ public class Ship : MonoBehaviour
     protected AudioSource Audio;
 
     //Player and scene information and padding
-    protected int MyHealth = 3;
+    protected int MyHealth = 10;
     protected float ShipSpeed = 1f;
     protected float Padding = 0.5f;
     protected float XMinRange = -5f;
@@ -49,7 +49,8 @@ public class Ship : MonoBehaviour
         float newX = Mathf.Clamp(ShipTransform.position.x, XMinRange, XMaxRange);
 
         //reset the position of the ship to the game space
-        ShipTransform.position = new Vector3(newX, ShipTransform.position.y, ShipTransform.position.z);
+        ShipTransform.position = new Vector3(newX, ShipTransform.position.y, 
+			ShipTransform.position.z);
     }
 
     //Call upon the ship flare.
@@ -69,7 +70,8 @@ public class Ship : MonoBehaviour
     // Spawn the explosion after the ship is destroy
     protected void SpawnExplosion(float timer)
     {
-        GameObject explosionCopy = Instantiate(Explosion, this.transform.position, Quaternion.identity) as GameObject;
+        GameObject explosionCopy = Instantiate( Explosion, transform.position,
+			 Quaternion.identity ) as GameObject;
         Destroy(explosionCopy, timer);
     }
 }

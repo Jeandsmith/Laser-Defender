@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices.ComTypes;
+using UnityEngine.Experimental.Director;
 
 public class PlayerCollisionTrigger : Ship
 {
+	public override void Start()
+	{
+		MyHealth = 5;	
+	}
 
     //Check collision trigger
     private void OnTriggerEnter2D(Collider2D other)
@@ -13,10 +19,12 @@ public class PlayerCollisionTrigger : Ship
         if (eBullet != null)
         {
             MyHealth -= eBullet.Damage();
+			LifeController iController = FindObjectOfType<LifeController>();
+			//iController.KeepTrackOfHealth();
 
             //Check if the player's health is at 0
             if (MyHealth <= 0)
-            {
+            {					
                 SpawnExplosion(2f);
                 Destroy(gameObject);
                 LevelManager levManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();

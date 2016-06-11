@@ -4,7 +4,7 @@ using System.Collections;
 
 
 //Ship base class
-public class Ship : MonoBehaviour
+public abstract class Ship : MonoBehaviour
 {
     //Get hold off the game object's transform.
     public Transform ShipTransform;
@@ -14,7 +14,7 @@ public class Ship : MonoBehaviour
     protected AudioSource Audio;
 
     //Player and scene information and padding
-    protected int MyHealth = 10;
+    protected int MyHealth;
     protected float ShipSpeed = 1f;
     protected float Padding = 0.5f;
     protected float XMinRange = -5f;
@@ -28,6 +28,7 @@ public class Ship : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
+		MyHealth = 1;
 
         //Get the transform of this object
         ShipTransform = GetComponent<Transform>();

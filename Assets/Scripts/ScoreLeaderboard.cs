@@ -2,17 +2,20 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ScoreLeaderboard : MonoBehaviour {
+public class ScoreLeaderboard: MonoBehaviour
+{
 
 	// Use this for initialization
-	void Start () {
-	      Text myText = GetComponent<Text>();
-            myText.text = ScoreKeeper.Score.ToString();
-            ScoreKeeper.ResetScore();
+	void Start ()
+	{
+		Text myText = GetComponent<Text> ();
+		myText.text = ScoreKeeper.Score.ToString ();
+		ScoreKeeper.ResetScore ();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
+
 	}
 }

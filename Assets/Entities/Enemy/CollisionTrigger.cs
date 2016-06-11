@@ -4,13 +4,14 @@ using System.Collections;
 public class CollisionTrigger: Ship
 {
 	private ScoreKeeper _scoreTracker;
-	public int MyValue = 154;
+	public int MyValue;
 
 
 	public override void Start()
 	{
 		//Get the game object and it's component.
 		_scoreTracker = FindObjectOfType<ScoreKeeper>().GetComponent<ScoreKeeper>();
+		MyHealth = 2;
 	}
 
 
@@ -28,6 +29,7 @@ public class CollisionTrigger: Ship
 			if ( MyHealth <= 0 )
 			{
                 SpawnExplosion(1.2f);
+				MyValue = Random.Range (Mathf.FloorToInt (150f), Mathf.FloorToInt (300f));
 				_scoreTracker.MaintainScore( MyValue );
 				Destroy( gameObject );
 				AudioSource.PlayClipAtPoint( DeadClip, transform.position );

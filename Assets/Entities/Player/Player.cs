@@ -10,22 +10,25 @@ public class Player : Ship
     public GameObject Bullet;
     private float FireRate = 0.2f;
 
-
+	public int MyHealth1
+	{
+		get {return MyHealth;}
+		set {MyHealth = value;}
+	}
 
 
     // Use this for initialization
     public override void Start()
     {
-        ShipSpeed = 10.0f;
-        MyHealth = 4;
-
         //Call upon the start function from the base class
         base.Start();
 
         //Save the X ranges of the view port
         XMinRange = AllTheWayLeft.x + Padding;
         XMaxRange = AllTheWayRight.x - Padding;
-    }
+		ShipSpeed = 10.0f;
+		MyHealth1 = 4;
+	}
 
 
 

@@ -9,7 +9,7 @@ public class Enemy: Ship
 
 
 	public override void Start()
-	{
+	{ 
 		base.Start();
 		MyHealth = 3;
 	}
